@@ -6,7 +6,8 @@ export default {
   schema: "./src/server/db/schema.ts",
   dialect: "postgresql",
   dbCredentials: {
-    url: env.DATABASE_URL,
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    url: env.POSTGRES_URL,
   },
   tablesFilter: ["gallery_*"],
 } satisfies Config;
