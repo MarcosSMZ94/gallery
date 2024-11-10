@@ -1,6 +1,7 @@
 import { SignedIn, SignedOut } from "@clerk/nextjs";
-import { db } from "~/server/db";
 
+import { db } from "~/server/db";
+import { UploadButton } from "./utils/uploadthing";
 export const dynamic = "force-dynamic";
 
 async function Images() {
@@ -9,23 +10,28 @@ async function Images() {
   });
   return (
     <div className="flex flex-wrap gap-4">
-        {[...images, ...images, ...images].map((image, index) => (
-          <div key={image.id + "-" + index} className="flex w-48 flex-col">
-            <img src={image.url} />
-            <div>{image.name}</div>
-          </div>
-        ))}
-      </div>
-  )
+      {[...images, ...images, ...images].map((image, index) => (
+        <div key={image.id + "-" + index} className="flex w-48 flex-col">
+          <img src={image.url} />
+          <div>{image.name}</div>
+        </div>
+      ))}
+    </div>
+  );
 }
 
 export default async function HomePage() {
   return (
     <main className="">
       <SignedOut>
-        <div className="w-full h-full text-2xl text-center">Please Sign In above</div>
+        <div className="h-full w-full text-center text-2xl">
+          Please Sign In above
+        </div>
       </SignedOut>
       <SignedIn>
+        <div>
+          <UploadButton endpoint="imageUploader"></UploadButton>
+        </div>
         <Images></Images>
       </SignedIn>
     </main>
